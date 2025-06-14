@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambil Absensi - Dashboard Mahasiswa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Link ke Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Pastikan ini terhubung ke file CSS dashboard Anda -->
+    <link rel="stylesheet" href="./css/dashboard1.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- ================= HEADER ================= -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <img src="./images/LOGO-UNRI.png" alt="Logo UNRI" class="logo">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>Sistem Layanan Informasi Universitas Riau</h1>
+            </div>
+        </header>
+
+        <div class="dashboard-body">
+            <!-- ================= SIDEBAR ================= -->
+            <aside class="sidebar" id="sidebar">
+                <nav>
+                    <ul>
+                        <li><a href="halamanutama.html"><i class="fas fa-home"></i><span>Home</span></a></li>
+                        <li><a href="halamankedua.html"><i class="fas fa-file-alt"></i><span>Report Absensi Perkuliahan</span></a></li>
+                        <li class="active"><a href="halamanketiga.html"><i class="fas fa-user-check"></i><span>Ambil Absensi Perkuliahan</span></a></li>
+                        <li><a href="panduan.html"><i class="fas fa-book-open"></i><span>Panduan</span></a></li>
+                        <li><a href="index.html"><i class="fas fa-arrow-left"></i><span>Back to Dashboard</span></a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- ================= KONTEN UTAMA HALAMAN ================= -->
+            <main class="main-content">
+                <div class="page-header">
+                    <h1>AMBIL ABSENSI PERKULIAHAN</h1>
+                </div>
+
+                <!-- Kotak Notifikasi -->
+                <div class="notice-box info">
+                    <strong>Note:</strong> Scanning QRCode Absensi Hanya Dapat Dilakukan Melalui Aplikasi Web
+                </div>
+                <button id="simulasi-daring" class="btn">Simulasikan Kelas Daring</button>
+                <!-- Layout utama halaman scanner -->
+                <div class="scanner-layout">
+                    <!-- Area kiri untuk kamera dan aksi -->
+                    <div class="scanner-main">
+                        <div class="location-info">
+                            <span class="label">Lokasi Anda (Recorded):</span>
+                            <span class="value">Jalan HR Soebrantas, Tuah Madani District, Pekanbaru, Binawidya, Riau</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="kamera">Pilih Kamera:</label>
+                            <select id="kamera" name="kamera">
+                                <option selected>USB2.0 HD UVC Web</option>
+                                <!-- Opsi kamera lain akan diisi oleh JavaScript -->
+                            </select>
+                        </div>
+                        <div class="camera-feed-container">
+                            <!-- Tag <video> untuk menampilkan feed dari kamera -->
+                            <video id="camera-feed" autoplay playsinline></video>
+                            <div class="scanner-overlay"></div>
+                        </div>
+                        <div class="attendance-status-options">
+                        <label>Pilih Status Kehadiran:</label>
+                        <div class="status-choices">
+                            <input type="radio" id="hadir" name="status" value="hadir" checked>
+                            <label for="hadir">Hadir</label>
+                            
+                            <input type="radio" id="izin" name="status" value="izin">
+                            <label for="izin">Izin</label>
+                            
+                            <input type="radio" id="sakit" name="status" value="sakit">
+                            <label for="sakit">Sakit</label>
+                        </div>
+                    </div>
+
+                    <div id="alasan-container" class="form-group" style="display: none;">
+                        <label for="alasan">Alasan/Keterangan:</label>
+                        <textarea id="alasan" rows="3" placeholder="Contoh: Ada urusan keluarga mendadak."></textarea>
+                        <label for="file-upload" class="btn-upload">Unggah Surat Bukti</label>
+                        <input type="file" id="file-upload" style="display: none;">
+                        <span id="file-name" class="file-name-display"></span>
+                    </div>
+                        <!-- PENAMBAHAN TOMBOL SUBMIT DI SINI -->
+                        <button type="submit" class="btn btn-submit-absensi">Submit Absensi</button>
+
+                    </div>
+
+                    <!-- Area kanan untuk info mahasiswa -->
+                    <aside class="scanner-sidebar">
+                        <div class="info-card">
+                            <ul class="info-list">
+                                <li><span class="label">Nama:</span><span class="value">Gary Andreas</span></li>
+                                <li><span class="label">NIM:</span><span class="value">123455</span></li>
+                                <li><span class="label">Fakultas:</span><span class="value">Teknik</span></li>
+                                <li><span class="label">Prodi:</span><span class="value">SI Teknik Informatika</span></li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Hubungkan ke file JavaScript Anda untuk fungsionalitas menu dan kamera -->
+    <script src="./js/main.js"></script>
+    <script> document.querySelectorAll('input[name="status"]').forEach(elem => {
+    elem.addEventListener("change", function(event) {
+        const alasanContainer = document.getElementById('alasan-container');
+        if(event.target.value === 'izin' || event.target.value === 'sakit') {
+            alasanContainer.style.display = 'block';
+        } else {
+            alasanContainer.style.display = 'none';
+        }
+    });
+});
+
+// Script untuk menampilkan nama file yang diunggah
+document.getElementById('file-upload').addEventListener('change', function(){
+    const fileName = this.files[0] ? this.files[0].name : "Tidak ada file yang dipilih.";
+    document.getElementById('file-name').textContent = 'File: ' + fileName;
+});</script>
+    <script>
+        document.getElementById('simulasi-daring').addEventListener('click', function(){
+    // Sembunyikan pemindai dan lokasi
+    document.querySelector('.camera-feed-container').style.display = 'none';
+    document.querySelector('.location-info').style.display = 'none';
+    // Tampilkan tombol konfirmasi
+    const konfirmasiDaring = document.createElement('div');
+    konfirmasiDaring.innerHTML = '<p>Kelas ini berlangsung secara Daring.</p><button class="btn btn-primary">Konfirmasi Kehadiran</button>';
+    document.querySelector('.scanner-main').appendChild(konfirmasiDaring);
+    this.style.display = 'none'; // Sembunyikan tombol simulasi
+});
+    </script>
+</body>
+</html>

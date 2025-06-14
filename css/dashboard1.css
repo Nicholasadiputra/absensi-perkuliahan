@@ -1,0 +1,958 @@
+:root {
+    --primary-green: #68B984; /* Warna hijau utama dari gambar */
+    --light-green-bg: #A2D9AE; /* Warna hijau muda untuk header card */
+    --dark-grey-sidebar: #4A5056;
+    --text-on-dark: #EAEAEA;
+    --text-on-light: #333333;
+    --card-bg: #FFFFFF;
+    --content-bg: #F4F6F9;
+    --border-light: #E0E0E0;
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 6px 15px rgba(0, 0, 0, 0.1);
+    --font-family: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--content-bg);
+    color: var(--text-on-light);
+    line-height: 1.6;
+}
+
+.dashboard-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.dashboard-header {
+    background-color: var(--primary-green);
+    color: white;
+    padding: 10px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-medium);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 45px;
+    margin-right: 15px;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-right: 20px;
+    display: none; /* Sembunyikan secara default untuk desktop, tampilkan via media query */
+}
+
+.dashboard-header h1 {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.dashboard-body {
+    display: flex;
+    flex-grow: 1;
+}
+
+.content-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    margin-bottom: 25px; /* <-- TAMBAHKAN BARIS INI */
+}
+
+.sidebar {
+    width: 300px;
+    background-color: var(--dark-grey-sidebar);
+    color: var(--text-on-dark);
+    padding: 25px 0;
+    transition: width 0.3s ease, transform 0.3s ease;
+    overflow-y: auto;
+    position: sticky;
+    top: 65px; /* Jarak dari atas, sesuaikan dengan tinggi header Anda */
+    height: calc(100vh - 65px);
+}
+
+.sidebar nav ul {
+    list-style: none;
+}
+
+.sidebar nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 14px 25px;
+    color: var(--text-on-dark);
+    text-decoration: none;
+    font-weight: 400;
+    transition: background-color 0.2s ease, padding-left 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.sidebar nav ul li a i {
+    margin-right: 15px;
+    font-size: 1.1em;
+    width: 20px;
+    text-align: center;
+    transition: margin-right 0.3s ease;
+}
+
+/* PERBAIKAN: Kode berulang untuk hover dan active digabung */
+.sidebar nav ul li.active a,
+.sidebar nav ul li a:hover {
+    background-color: var(--primary-green);
+    color: white;
+    border-radius: 0;
+    margin-left: 0;
+    padding-left: 25px;
+}
+
+/* PERBAIKAN: Kode spesifik untuk active state saja */
+.sidebar nav ul li.active a {
+    font-weight: 500;
+    border-left: 4px solid var(--light-green-bg);
+}
+
+
+.main-content {
+    flex-grow: 1;
+    padding: 25px;
+    overflow-y: auto;
+    transition: margin-left 0.3s ease; /* Jika sidebar push content */
+}
+
+.welcome-banner {
+    background: linear-gradient(90deg, var(--primary-green) 0%, #82c99a 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow-soft);
+}
+
+.welcome-banner h2 {
+    font-size: 1.8em;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.welcome-banner p {
+    font-size: 1em;
+    font-weight: 300;
+}
+
+.content-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Agar card body bisa flex-grow */
+}
+
+.card-header {
+    background-color: var(--light-green-bg);
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.card-header h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--text-on-light);
+}
+
+.card-body {
+    padding: 20px;
+    flex-grow: 1; /* Membuat card body mengisi sisa ruang */
+}
+
+/* Data Mahasiswa Card */
+.data-mahasiswa .profile-pic-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-green);
+    object-fit: cover;
+    background-color: #e0e0e0;
+}
+
+.info-list {
+    list-style: none;
+}
+
+.info-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 5px;
+    border-bottom: 1px dashed var(--border-light);
+    font-size: 0.95em;
+}
+
+.info-list li:last-child {
+    border-bottom: none;
+}
+
+.info-list .label {
+    font-weight: 500;
+    color: #555;
+    margin-right: 10px; /* Jarak antara label dan value */
+    white-space: nowrap;
+}
+
+.info-list .value {
+    font-weight: 400;
+    color: var(--text-on-light);
+    text-align: right; /* Agar value rata kanan */
+}
+
+.status-aktif {
+    color: var(--primary-green) !important;
+    font-weight: 600 !important;
+}
+
+/* Perkembangan Akademik Card */
+.perkembangan-akademik .ipk-info {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.progress-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    min-height: 120px; /* Beri ruang untuk arc */
+}
+
+.progress-arc {
+    width: 180px;
+    height: 90px;
+    border-radius: 180px 180px 0 0;
+    background: conic-gradient(var(--primary-green) 0% var(--progress-percentage, 0%), #e9ecef var(--progress-percentage, 0%) 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    --progress-percentage: 70%; /* Atur via JS atau inline style untuk dinamis */
+}
+.progress-arc::before { /* Inner white circle to make it a donut */
+    content: '';
+    position: absolute;
+    width: calc(100% - 30px); /* (thickness of arc * 2) */
+    height: calc(100% - 15px); /* (thickness of arc * 1) for half circle */
+    background: var(--card-bg);
+    border-radius: 150px 150px 0 0; /* Adjust to match inner curve */
+    top: 15px; /* thickness of arc */
+}
+
+.progress-arc-inner {
+    position: relative; /* Agar di atas pseudo-element ::before */
+    z-index: 1;
+    text-align: center;
+    padding-bottom: 10px; /* Agar teks tidak terlalu mepet bawah */
+}
+
+.semester-text {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--text-on-light);
+}
+
+.target-sks {
+    display: block;
+    font-size: 0.8em;
+    color: #777;
+}
+
+.academic-stats {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px; /* Mengurangi gap sedikit */
+    margin-top: 20px;
+}
+
+.stat-item {
+    background-color: #F8F9FA; /* Warna yang sedikit berbeda untuk kontras */
+    padding: 12px; /* Padding disesuaikan */
+    border-radius: 8px;
+    text-align: center;
+    flex-grow: 1;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.6em; /* Sedikit disesuaikan */
+    font-weight: 700;
+    color: var(--primary-green);
+    margin-bottom: 3px;
+}
+
+.stat-label {
+    font-size: 0.75em; /* Sedikit lebih kecil */
+    color: #666;
+    white-space: normal; /* Izinkan teks wrap jika perlu */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .menu-toggle {
+        display: block; /* Tampilkan tombol menu */
+    }
+    .sidebar {
+        position: fixed;
+        left: -280px; /* Sembunyikan di luar layar */
+        height: 100vh; /* Full height */
+        top: 0; /* Mulai dari atas */
+        z-index: 1001; /* Di atas header saat terbuka */
+        box-shadow: var(--shadow-medium);
+        padding-top: 70px; /* Beri ruang untuk header jika header tidak fixed atau di-overlay */
+    }
+    .sidebar.open {
+        left: 0; /* Tampilkan sidebar */
+        transform: translateX(0);
+    }
+    /* Jika Anda ingin konten utama terdorong saat sidebar terbuka: */
+    /*
+    .main-content.sidebar-open {
+        margin-left: 260px;
+    }
+    */
+}
+
+@media (max-width: 768px) {
+    .dashboard-header h1 {
+        font-size: 1em;
+    }
+    .welcome-banner h2 {
+        font-size: 1.5em;
+    }
+    .academic-stats {
+        flex-direction: column; /* Tumpuk item statistik */
+        gap: 10px;
+    }
+    .stat-item {
+      width: 100%; /* Agar mengambil lebar penuh saat ditumpuk */
+    }
+    .info-list li {
+        flex-direction: column; /* Tumpuk label dan value pada layar kecil */
+        align-items: flex-start;
+    }
+    .info-list .value {
+        text-align: left; /* Rata kiri untuk value saat ditumpuk */
+        margin-top: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-header {
+        padding: 10px 15px;
+    }
+    .main-content {
+        padding: 15px;
+    }
+    .welcome-banner {
+        padding: 20px;
+    }
+    .logo {
+        height: 35px;
+    }
+    .menu-toggle {
+        font-size: 1.3em;
+        margin-right: 10px;
+    }
+    .card-body {
+        padding: 15px;
+    }
+
+}
+
+/* ... Kode CSS untuk card Data Mahasiswa dan Perkembangan Akademik tetap sama ... */
+/* ... (Saya singkat di sini untuk keringkasan, tapi di file asli Anda harus ada) ... */
+.data-mahasiswa .profile-pic-container { text-align: center; margin-bottom: 20px; }
+.profile-pic { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary-green); object-fit: cover; background-color: #e0e0e0; }
+.info-list { list-style: none; }
+.info-list li { display: flex; justify-content: space-between; padding: 10px 5px; border-bottom: 1px dashed var(--border-light); font-size: 0.95em; }
+.info-list li:last-child { border-bottom: none; }
+.info-list .label { font-weight: 500; color: #555; margin-right: 10px; white-space: nowrap; }
+.info-list .value { font-weight: 400; color: var(--text-on-light); text-align: right; }
+.status-aktif { color: var(--primary-green) !important; font-weight: 600 !important; }
+.perkembangan-akademik .ipk-info { font-size: 0.9em; color: #666; margin-bottom: 20px; text-align: center; }
+.progress-chart-container { display: flex; justify-content: center; align-items: center; margin-bottom: 25px; min-height: 120px; }
+.progress-arc { position: relative; width: 180px; height: 90px; border-radius: 180px 180px 0 0; background: conic-gradient(from 0deg, var(--primary-green) 0% var(--progress-percentage), #e9ecef var(--progress-percentage) 100%); transform: rotate(0deg); --progress-percentage: 29.16%; }
+.progress-arc::before { content: ''; position: absolute; width: calc(100% - 30px); height: calc(100% - 15px); background: var(--card-bg); border-radius: 150px 150px 0 0; top: 15px; left: 15px; }
+.progress-arc-inner { position: relative; z-index: 2; text-align: center; transform: rotate(0deg); width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.semester-text { font-size: 1.1em; font-weight: 600; color: var(--text-on-light); margin-bottom: 5px; }
+.target-sks { font-size: 0.8em; color: #777; }
+.academic-stats { display: flex; justify-content: space-around; gap: 10px; margin-top: 20px; }
+.stat-item { background-color: #F8F9FA; padding: 12px; border-radius: 8px; text-align: center; flex-grow: 1; border: 1px solid var(--border-light); box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+.stat-value { display: block; font-size: 1.6em; font-weight: 700; color: var(--primary-green); margin-bottom: 3px; }
+.stat-label { font-size: 0.75em; color: #666; white-space: normal; }
+
+
+/* =============================================== */
+/* == PENAMBAHAN: GAYA UNTUK HALAMAN REPORT ABSENSI == */
+/* =============================================== */
+
+.page-header {
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    font-size: 1.8em;
+    font-weight: 600;
+    color: var(--text-on-light);
+}
+
+.filter-card {
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-end;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 200px;
+}
+
+.form-group label {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    background-color: #fff;
+    font-family: var(--font-family);
+    font-size: 1em;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-green);
+}
+
+.form-group.button-group {
+    flex: 0 0 auto;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 30px;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    border: none;
+    box-sizing: border-box;
+}
+
+.btn-primary {
+    background-color: #3B82F6;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2563EB;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.student-identifier {
+    font-size: 1em;
+    font-weight: 500;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #F8F9FA;
+    border-radius: 6px;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+}
+
+.attendance-table th,
+.attendance-table td {
+    border: 1px solid var(--border-light);
+    padding: 12px 15px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.attendance-table thead {
+    background-color: #F8F9FA;
+}
+
+.attendance-table th {
+    font-weight: 600;
+    color: #333;
+}
+
+.attendance-table tbody tr:nth-child(even) {
+    background-color: #FDFDFD;
+}
+
+.attendance-table tbody tr:hover {
+    background-color: #F0F4FF;
+}
+
+.attendance-table td {
+    color: #555;
+}
+
+.attendance-table td:first-child,
+.attendance-table td:nth-child(n+5) {
+    text-align: center;
+}
+
+
+/* Submit button styling */
+.btn-submit-absensi {
+    background-color: #2196F3; /* Primary blue color */
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit-absensi:hover {
+    background-color: #1976D2; /* Darker blue on hover */
+}
+
+.btn-submit-absensi:active {
+    background-color: #1565C0; /* Even darker when clicked */
+    transform: translateY(1px);
+}
+
+.btn-submit-absensi:disabled {
+    background-color: #90CAF9; /* Light blue when disabled */
+    cursor: not-allowed;
+}
+
+/* Styling for attendance summary */
+.ringkasan-absensi .card-body {
+    padding: 20px;
+}
+
+.absensi-chart-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    align-items: center;
+}
+
+.pie-chart {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+.absensi-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.legend-item:hover {
+    transform: translateX(5px);
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.legend-item .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.dot.hadir { background-color: #4CAF50; }
+.dot.izin { background-color: #FFC107; }
+.dot.sakit { background-color: #2196F3; }
+.dot.alpha { background-color: #F44336; }
+
+.legend-item .label {
+    flex: 1;
+    font-weight: 500;
+    color: #555;
+}
+
+.legend-item .value {
+    font-weight: 600;
+    color: #333;
+    background: #fff;
+    padding: 4px 12px;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .absensi-chart-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .pie-chart {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .menu-toggle {
+        display: block;
+    }
+    .sidebar {
+        position: fixed;
+        left: -300px;
+        height: 100vh;
+        top: 0;
+        z-index: 1001;
+    }
+    .sidebar.open {
+        left: 0;
+    }
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-header h1 {
+        font-size: 1em;
+    }
+}
+
+/* =============================================== */
+/* == Gaya untuk Halaman Ambil Absensi == */
+/* =============================================== */
+
+/* Kotak Notifikasi */
+.notice-box {
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    border: 1px solid;
+    font-size: 0.95em;
+}
+
+.notice-box.info {
+    background-color: #E0F2FE; /* Biru muda */
+    border-color: #7DD3FC;
+    color: #075985;
+}
+
+.notice-box strong {
+    font-weight: 600;
+}
+
+/* Layout utama halaman scanner */
+.scanner-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Kolom kiri 2x lebih besar dari kanan */
+    gap: 25px;
+}
+
+.scanner-main {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Info Lokasi */
+.location-info {
+    margin-bottom: 20px;
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+}
+
+.location-info .label {
+    display: block;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.location-info .value {
+    font-size: 1em;
+    color: var(--text-on-light);
+}
+
+/* Kita menggunakan .form-group dari gaya sebelumnya, jadi tidak perlu membuat baru */
+.scanner-main .form-group {
+    margin-bottom: 15px;
+}
+
+
+/* Kontainer untuk feed kamera */
+.camera-feed-container {
+    width: 100%;
+    aspect-ratio: 4 / 3; /* Menjaga rasio video */
+    background-color: #000000;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+#camera-feed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Memastikan video mengisi kontainer tanpa distorsi */
+}
+
+/* Overlay untuk efek visual scanner (opsional) */
+.scanner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Contoh: Anda bisa menambahkan border di tengah atau animasi garis scan di sini */
+    /* border: 2px solid rgba(255, 0, 0, 0.7); */
+}
+
+
+/* Info card di sidebar kanan */
+.info-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 10px; /* Padding lebih kecil agar ringkas */
+    height: 100%; /* Membuat kartu ini setinggi kolomnya */
+}
+
+/* Kita bisa menggunakan kembali gaya .info-list dari halaman dashboard utama */
+.info-card .info-list li {
+    padding: 12px 10px;
+}
+
+/* Penyesuaian Responsif untuk Halaman Scanner */
+@media (max-width: 1024px) {
+    .scanner-layout {
+        grid-template-columns: 1fr; /* Ubah jadi 1 kolom di layar tablet/kecil */
+    }
+    .scanner-sidebar {
+        margin-top: 25px; /* Beri jarak jika di bawah */
+    }
+}
+
+/* Gaya untuk baris ringkasan yang bisa diklik */
+.course-summary {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.course-summary:hover {
+    background-color: #eef2f5;
+}
+/* Sembunyikan detail secara default */
+.course-detail {
+    display: none;
+}
+/* Tabel detail */
+.detail-table {
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+}
+.detail-table td, .detail-table th {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+.status-tepat-waktu { color: #4CAF50; font-weight: bold; }
+.status-terlambat { color: #F44336; font-weight: bold; }
+.lokasi { color: #2196F3; text-decoration: underline; cursor: pointer; }
+
+/* =============================================== */
+/* == Gaya untuk Halaman Panduan                  == */
+/* =============================================== */
+
+.panduan-section-title {
+    font-size: 1.4em;
+    font-weight: 500;
+    margin-bottom: 25px;
+    color: var(--text-on-light);
+    border-bottom: 2px solid var(--primary-green);
+    padding-bottom: 10px;
+}
+
+.panduan-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.panduan-item h4 {
+    font-weight: 500;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.video-container,
+.pdf-container {
+    width: 100%;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.pdf-container {
+    height: 450px; /* Atur tinggi kontainer PDF */
+}
+
+.pdf-container iframe {
+    border: none;
+}
+
+/* Penyesuaian Responsif untuk Halaman Panduan */
+@media (max-width: 992px) {
+    .panduan-layout {
+        grid-template-columns: 1fr; /* Ubah jadi 1 kolom di layar kecil */
+    }
+}
+
+/* =============================================== */
+/* == Gaya untuk Modal Peta Lokasi              == */
+/* =============================================== */
+
+/* Latar belakang modal - PENTING: display: none; */
+.modal {
+    display: none; /* Sembunyikan modal secara default */
+    position: fixed; /* Tetap di posisi yang sama */
+    z-index: 1010; /* Pastikan di atas elemen lain */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Aktifkan scroll jika perlu */
+    background-color: rgba(0, 0, 0, 0.6); /* Latar belakang hitam transparan */
+}
+
+/* Kotak konten modal - PENTING: max-width */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* Jarak dari atas dan tengah secara horizontal */
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%; /* Lebar relatif untuk layar kecil */
+    max-width: 800px; /* LEBAR MAKSIMAL agar tidak terlalu besar di layar desktop */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+/* Tombol Close (x) */
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+}

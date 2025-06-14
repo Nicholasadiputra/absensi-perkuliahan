@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Absensi - Dashboard Mahasiswa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./css/dashboard1.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <img src="./images/LOGO-UNRI.png" alt="Logo UNRI" class="logo">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>Sistem Layanan Informasi Universitas Riau</h1>
+            </div>
+            </header>
+
+        <div class="dashboard-body">
+            <aside class="sidebar" id="sidebar">
+                <nav>
+                    <ul>
+                        <li><a href="halamanutama.html"><i class="fas fa-home"></i><span>Home</span></a></li>
+                        <li class="active"><a href="halamankedua.html"><i class="fas fa-file-alt"></i><span>Report Absensi Perkuliahan</span></a></li>
+                        <li><a href="halamanketiga.html"><i class="fas fa-user-check"></i><span>Ambil Absensi Perkuliahan</span></a></li>
+                        <li><a href="panduan.html"><i class="fas fa-book-open"></i><span>Panduan</span></a></li>
+                        <li><a href="index.html"><i class="fas fa-arrow-left"></i><span>Back to Dashboard SSO</span></a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div class="page-header">
+                    <h1>Report Absensi Perkuliahan</h1>
+                </div>
+
+                <div class="card filter-card">
+                    <form class="filter-form">
+                        <div class="form-group">
+                            <label for="fakultas">Daftar Fakultas Perkuliahan</label>
+                            <select id="fakultas" name="fakultas">
+                                <option selected>Pilih Fakultas</option>
+                                <option value="teknik">Teknik</option>
+                                <option value="fmipa">FMIPA</option>
+                                <option value="ekonomi">Ekonomi dan Bisnis</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="semester">Daftar Semester Perkuliahan</label>
+                            <select id="semester" name="semester">
+                                <option selected>Pilih Semester</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                                <option value="4">Semester 4</option>
+                            </select>
+                        </div>
+                        <div class="form-group button-group">
+                             <button type="submit" class="btn btn-primary">Lihat</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card report-table-card">
+                    <div class="card-body">
+                        <p class="student-identifier">Mahasiswa : GARY ANDREAS 1234455</p>
+                        <div class="table-container">
+                            <table class="attendance-table">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Kode MK</th>
+                                        <th>Mata Kuliah</th>
+                                        <th>Jenis</th>
+                                        <th>Hadir</th>
+                                        <th>Alpha</th>
+                                        <th>Sakit</th>
+                                        <th>Izin</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="report-body">
+                                    <tr class="course-summary" data-course="IF101">
+                                        <td>1.</td>
+                                        <td>IF101</td>
+                                        <td>Dasar Pemrograman</td>
+                                        <td>Teori</td>
+                                        <td>14</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr class="course-detail" id="detail-IF101">
+                                        <td colspan="8">
+                                            <table class="detail-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Pertemuan</th>
+                                                        <th>Tanggal</th>
+                                                        <th>Absen Masuk</th>
+                                                        <th>Absen Keluar</th>
+                                                        <th>Status</th>
+                                                        <th>Lokasi (Klik untuk lihat Peta)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Kamis, 05 Juni 2025</td>
+                                                        <td>08:01</td>
+                                                        <td>09:40</td>
+                                                        <td class="status-tepat-waktu">Tepat Waktu</td>
+                                                        <td class="lokasi">Gedung C323, Kampus UNRI</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>Kamis, 12 Juni 2025</td>
+                                                        <td>08:17</td>
+                                                        <td>09:40</td>
+                                                        <td class="status-terlambat">Terlambat</td>
+                                                        <td class="lokasi">Gedung C323, Kampus UNRI</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr class="course-summary" data-course="KU201">
+                                        <td>2.</td>
+                                        <td>KU201</td>
+                                        <td>Pendidikan Kewarganegaraan</td>
+                                        <td>Umum</td>
+                                        <td>16</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr class="course-detail" id="detail-KU201">
+                                        <td colspan="8">
+                                            <p style="padding: 15px; text-align: center;">Tidak ada data detail untuk ditampilkan.</p>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="course-summary" data-course="MA101">
+                                        <td>3.</td>
+                                        <td>MA101</td>
+                                        <td>Kalkulus I</td>
+                                        <td>Teori</td>
+                                        <td>15</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr class="course-detail" id="detail-MA101">
+                                       <td colspan="8">
+                                            <p style="padding: 15px; text-align: center;">Tidak ada data detail untuk ditampilkan.</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="map-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Lokasi Absensi Tercatat</h2>
+            <img src="./images/Screenshot 2025-06-11 212249.png" alt="Peta Lokasi" style="width:100%; border-radius: 8px;">
+        </div>
+    </div>
+
+    <script src="./js/main.js"></script>
+
+    <script>
+        // --- SCRIPT UNTUK EXPAND/COLLAPSE DETAIL KULIAH ---
+        document.querySelectorAll('.course-summary').forEach(row => {
+            row.addEventListener('click', function() {
+                const courseId = this.dataset.course;
+                const detailRow = document.getElementById('detail-' + courseId);
+                if (detailRow.style.display === 'table-row') {
+                    detailRow.style.display = 'none';
+                } else {
+                    detailRow.style.display = 'table-row';
+                }
+            });
+        });
+
+        // --- SCRIPT UNTUK MODAL PETA ---
+        const mapModal = document.getElementById('map-modal');
+        const closeBtn = document.querySelector('.modal .close-button');
+
+        // Fungsi untuk menyembunyikan modal
+        function closeModal() {
+            mapModal.style.display = 'none';
+        }
+
+        // Tampilkan modal saat link lokasi di dalam tabel diklik
+        document.querySelector('.attendance-table').addEventListener('click', function(event) {
+            if (event.target.classList.contains('lokasi')) {
+                mapModal.style.display = 'block';
+            }
+        });
+
+        // Sembunyikan modal saat tombol (x) diklik
+        closeBtn.addEventListener('click', closeModal);
+
+        // Sembunyikan modal saat area di luar modal diklik
+        window.addEventListener('click', function(event) {
+            if (event.target == mapModal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
