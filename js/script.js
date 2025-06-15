@@ -41,9 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             options: {
                 responsive: true,
-                animation: {
-                    duration: 0 // Disable all animations
-                },
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         display: false
